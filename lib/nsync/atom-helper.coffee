@@ -44,6 +44,15 @@ module.exports = helper =
       @info 'Learn IDE: loading your remote code...',
         dismissable: true
 
+  observeConnection: (callback) ->
+    atom.emitter.on('learn-ide:connection-open', callback)
+
+    pkg = atom.packages.loadPackage(primaryLearnIDEPackage)
+    connection = pkg.mainModule.term?.channel
+
+    if connection?
+      callback(connection)
+
   open: (path) ->
     atom.workspace.open(path).then =>
       @treeView()?.revealActiveFile()
@@ -57,6 +66,8 @@ module.exports = helper =
     atom.project.addPath(path)
     @treeView()?.updateRoots(directoryExpansionStates)
     @updateTitle()
+    view = atom.views.getView(atom.workspace)
+    atom.commands.dispatch(view, 'tree-view:show')
 
   resetTitleUpdate: ->
     # TODO: call this on deactivate
@@ -89,15 +100,6 @@ module.exports = helper =
   treeView: ->
     pkg = atom.packages.getActivePackage(name)
     pkg?.mainModule.treeView
-
-  getToken: ->
-    new Promise (resolve) ->
-      pkg = atom.packages.loadPackage(primaryLearnIDEPackage)
-      token = pkg.mainModule.token
-
-      token.observe (value) ->
-        if value?
-          resolve(value)
 
   learnIdeVersion: ->
     if not LEARN_IDE_VERSION?

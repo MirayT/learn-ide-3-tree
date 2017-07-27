@@ -46,7 +46,7 @@
     },
     "hideIgnoredNames": {
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Don't show items matched by the `Ignored Names` core config setting."
     },
     "showOnRightSide": {

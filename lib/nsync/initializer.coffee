@@ -171,7 +171,7 @@ module.exports = helper = (activationState) ->
         composite.add resultModel.onDidReplacePath ({filePath}) ->
           onFindAndReplace(filePath)
 
-    atom.emitter.on 'learn-ide:connection-open', (channel) ->
+    atomHelper.observeConnection (channel) ->
       nsync.configure
         expansionState: activationState.directoryExpansionStates
         localRoot: _path.join(atom.configDirPath, '.learn-ide')
