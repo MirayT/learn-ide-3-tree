@@ -1,15 +1,15 @@
 {
-  "name": "learn-ide-tree",
-  "version": "1.0.24",
+  "name": "learn-ide-3-tree",
+  "version": "2.0.0",
   "upstreamVersion": "0.213.1",
   "main": "./lib/main",
-  "description": "A Tree View replacement for the Learn IDE",
-  "repository": "https://github.com/learn-co/learn-ide-tree",
+  "description": "[BETA] A tree view replacement for Learn IDE 3",
+  "repository": "https://github.com/learn-co/learn-ide-3-tree",
   "license": "MIT",
   "engines": {
     "atom": "*"
   },
-  "primaryLearnIDEPackage": "learn-ide",
+  "primaryLearnIDEPackage": "learn-ide-3",
   "private": true,
   "dependencies": {
     "atom-space-pen-views": "^2.1.1",
