@@ -2,6 +2,7 @@ nsync = require 'nsync-fs'
 shell = require 'shell'
 atomHelper = require './atom-helper'
 WebWindow = require './web-window'
+{ipcRenderer} = require 'electron'
 
 commandStrategies = {
   browser_open: ({url}) ->
@@ -12,6 +13,10 @@ commandStrategies = {
     if node?
       atomHelper.open(node.localPath()).then ->
         atomHelper.termFocus()
+
+  open_lab: ({lab_name}) ->
+    localStorage.setItem('learnOpenLabOnActivation', lab_name)
+    ipcRenderer.send('command', 'application:new-window')
 
   learn_submit: ({url}) ->
     new WebWindow(url, {resizable: false})
